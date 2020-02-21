@@ -45,10 +45,11 @@ fetchPokemon('pikachu').then(pokemon => {
  // console.log('............ ', getSprites(pokemon.sprites))
 }).catch(error => console.log(error)) */
 
-const pokemonNumbers = [...Array(150).keys()]
+const pokemonNumbers = [...Array(150).keys()];
+
 const lazilyFetchPokemon = ids =>
   ids.reduce((previousPromises, nextId) =>
     previousPromises.then(() => fetchPokemon(nextId).then(res => console.log(res.name))),
-    Promise.resolve())
+    Promise.resolve());
 
-lazilyFetchPokemon(pokemonNumbers.slice(1))
+lazilyFetchPokemon(pokemonNumbers.slice(1));
