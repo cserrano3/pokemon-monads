@@ -26,7 +26,7 @@ class Maybe {
   }
 }
 
-/* const compose = (f, g) => object => f(g(object))
+/*
 
 const getBy = (object, by) => prop(object, by)
 const getValue = (object, pathWay) => path(pathWay, object)
@@ -52,4 +52,22 @@ const lazilyFetchPokemon = ids =>
     previousPromises.then(() => fetchPokemon(nextId).then(res => console.log(res.name))),
     Promise.resolve());
 
-lazilyFetchPokemon(pokemonNumbers.slice(1));
+// lazilyFetchPokemon(pokemonNumbers.slice(1));
+const compose = (functionA, functionB, functionC) => valueInCommon => functionA(functionB(functionC(valueInCommon)))
+
+const composeByReducingRight = (...functionsToBeComposedArray) =>
+  valueInCommon =>
+  functionsToBeComposedArray.reduceRight((finalState, currentFunction) =>
+    currentFunction(finalState),
+    valueInCommon)
+
+const trace = label => value => {
+  console.log(`${ label }: ${ value }`);
+  return value;
+};
+
+const split = string => string.split('')
+const toUpper = string => string.toUpperCase()
+
+compose(split, toUpper)('rogerThat')
+
