@@ -59,7 +59,7 @@ const composeByReducingRight = (...functionsToBeComposedArray) =>
   valueInCommon =>
   functionsToBeComposedArray.reduceRight((finalState, currentFunction) =>
     currentFunction(finalState),
-    valueInCommon)
+    valueInCommon);
 
 const trace = label => value => {
   console.log(`${ label }: ${ value }`);
@@ -67,7 +67,7 @@ const trace = label => value => {
 };
 
 const split = string => string.split('')
-const toUpper = string => string.toUpperCase()
+const toUpper = string => string.toUpperCase();
 
-compose(split, toUpper)('rogerThat')
 
+const toUpperSplit = composeByReducingRight(trace('before split'), split, trace('after split'), toUpper, trace('after upper'));
