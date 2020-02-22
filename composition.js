@@ -8,6 +8,10 @@ const compose = (functionA, functionB, functionC) => valueInCommon =>
     The array of functions is interated from right to left, and each one of them
     is applied to the cumulative value of the argument in common amongst them.
 */
+
+/*
+  The functions are executed from right to left.
+*/
 const composeByReducingRight = (
   ...functionsToBeComposedArray
 ) => valueInCommon =>
@@ -25,11 +29,11 @@ const split = string => string.split('');
 const toUpper = string => string.toUpperCase();
 
 const toUpperSplit = composeByReducingRight(
-  trace('before split'),
-  split,
   trace('after split'),
+  split,
+  trace('after upeer'),
   toUpper,
-  trace('after upper'),
+  trace('before upper'),
 );
 
 toUpperSplit('Machen sie diese Zeilen im Bedarfsfall frei.');
