@@ -1,5 +1,5 @@
 const compose = (functionA, functionB, functionC) => valueInCommon =>
-  functionA(functionB(functionC(valueInCommon)))
+  functionA(functionB(functionC(valueInCommon)));
 
 /*
     ComposeByReucingRIght receive an array os functions
@@ -13,23 +13,23 @@ const composeByReducingRight = (
 ) => valueInCommon =>
   functionsToBeComposedArray.reduceRight(
     (finalState, currentFunction) => currentFunction(finalState),
-    valueInCommon
-  )
+    valueInCommon,
+  );
 
 const trace = label => value => {
-  console.log(`${label}: ${value}`)
-  return value
-}
+  console.log(`${label}: ${value}`);
+  return value;
+};
 
-const split = string => string.split("")
-const toUpper = string => string.toUpperCase()
+const split = string => string.split('');
+const toUpper = string => string.toUpperCase();
 
 const toUpperSplit = composeByReducingRight(
-  trace("before split"),
+  trace('before split'),
   split,
-  trace("after split"),
+  trace('after split'),
   toUpper,
-  trace("after upper")
-)
+  trace('after upper'),
+);
 
-toUpperSplit('Machen sie diese Zeilen im Bedarfsfall frei.')
+toUpperSplit('Machen sie diese Zeilen im Bedarfsfall frei.');
