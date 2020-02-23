@@ -20,6 +20,22 @@ const composeByReducingRight = (
     valueInCommon,
   );
 
+/* Pipe will do the same as compose, but it will start the function executions
+from left to right */
+const pipe = (...functions) => paramInCommon =>
+  functions.reduce(
+    (finalValue, currentFunction) => currentFunction(finalValue),
+    paramInCommon,
+  );
+
+function pipeES5(...functions) {
+  return function(paramInCommon) {
+    return functions.reduce(function(finalValue, currentFunction) {
+      return currentFunction(finalValue);
+    }, paramInCommon);
+  }
+}
+
 const trace = label => value => {
   console.log(`${label}: ${value}`);
   return value;
@@ -27,6 +43,7 @@ const trace = label => value => {
 
 const split = string => string.split('');
 const toUpper = string => string.toUpperCase();
+const mapThis = fn => mappable => mappable.map(fn)
 
 const toUpperSplit = composeByReducingRight(
   trace('after split'),
@@ -36,4 +53,9 @@ const toUpperSplit = composeByReducingRight(
   trace('before upper'),
 );
 
+
 toUpperSplit('Machen sie diese Zeilen im Bedarfsfall frei.');
+
+const splitted = split('Machen sie diese Zeilen im Bedarfsfall frei.');
+const mappedSplit = mapThis(toUpper)(splitted)
+console.log(mappedSplit)
